@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <SidebarProvider>
           <AppSidebar />
-          <main className="">
+          <main className="container mx-auto">
             <SidebarTrigger />
             {children}
           </main>
