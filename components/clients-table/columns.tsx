@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { Client } from "@/lib/types";
+import { ClientForm } from "../dialogs/ClientForm";
 // import { DialogDelete } from "../DialogDelete";
 
 export const columns: ColumnDef<Client>[] = [
@@ -85,7 +86,7 @@ export const columns: ColumnDef<Client>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex justify-end gap-2">
-          <Link href={`/update-client/${row.getValue("id")}`}>
+          {/* <Link href={`/update-client/${row.getValue("id")}`}>
             <Button variant="outline" size="icon">
               <svg
                 className="w-5 h-5 text-gray-800 dark:text-white"
@@ -105,7 +106,8 @@ export const columns: ColumnDef<Client>[] = [
                 />
               </svg>
             </Button>
-          </Link>
+          </Link> */}
+          <ClientForm mode="update" />
 
           {/* <DialogDelete table={"clients"} id={row.getValue("id")} /> */}
         </div>

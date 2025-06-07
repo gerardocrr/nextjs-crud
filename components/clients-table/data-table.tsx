@@ -77,7 +77,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full">
       <div className="flex items-center py-4 justify-between">
-        <ClientForm />
+        <ClientForm mode="new" />
         <div className="flex gap-5">
           <Input
             placeholder="Filter emails..."

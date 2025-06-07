@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -19,23 +18,40 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { PropsClient } from "@/lib/types";
+import { Pencil } from "lucide-react";
 
-export function ClientForm() {
+export function ClientForm({ mode, client }: PropsClient) {
   return (
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button>New client</Button>
+          {mode === "new" ? (
+            <Button>New client</Button>
+          ) : (
+            <Button variant="outline" size="icon">
+              <Pencil />
+            </Button>
+          )}
         </DialogTrigger>
         <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4">
+          {mode === "new" ? (
+            <DialogHeader>
+              <DialogTitle>Add a new client</DialogTitle>
+              <DialogDescription>
+                Fill in the requested data, click on save when you are done.
+              </DialogDescription>
+            </DialogHeader>
+          ) : (
+            <DialogHeader>
+              <DialogTitle>Update client</DialogTitle>
+              <DialogDescription>
+                Modify the data you need, click on update when you are done.
+              </DialogDescription>
+            </DialogHeader>
+          )}
+          <div className="grid gap-4 w-full">
             <div className="grid gap-3">
               <label htmlFor="name">Name</label>
               <Input id="name" name="name" defaultValue="" />
@@ -52,7 +68,7 @@ export function ClientForm() {
                 // }}
                 required
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent>
@@ -85,6 +101,7 @@ export function ClientForm() {
                 id="amount"
                 name="amount"
                 placeholder="000.00"
+                min={0}
                 // onChange={handleChange}
                 // value={formData.amount}
                 required
@@ -95,7 +112,11 @@ export function ClientForm() {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit">Save client</Button>
+            {mode === "new" ? (
+              <Button type="submit">Save</Button>
+            ) : (
+              <Button type="submit">Update</Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </form>
