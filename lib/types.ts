@@ -15,3 +15,14 @@ export type Movie = {
   poster: string;
   created_at: string;
 };
+
+export interface PropsClient {
+  mode: string;
+  client?: {
+    id: string;
+    name: string;
+    status: string;
+    email: string;
+    amount: number;
+  };
+}
