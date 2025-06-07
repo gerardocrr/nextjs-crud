@@ -54,12 +54,12 @@ export function ClientForm({ mode, client }: PropsClient) {
           <div className="grid gap-4 w-full">
             <div className="grid gap-3">
               <label htmlFor="name">Name</label>
-              <Input id="name" name="name" defaultValue="" />
+              <Input id="name" name="name" defaultValue={client?.name} />
             </div>
             <div className="grid gap-3">
               <label htmlFor="status">Status</label>
               <Select
-                // value={formData.status}
+                defaultValue={client?.status}
                 // onValueChange={(value) => {
                 //   setFormData((prevData) => ({
                 //     ...prevData,
@@ -90,7 +90,7 @@ export function ClientForm({ mode, client }: PropsClient) {
                 name="email"
                 placeholder="email@company.com"
                 // onChange={handleChange}
-                // value={formData.email}
+                defaultValue={client?.email}
                 required
               />
             </div>
@@ -103,7 +103,7 @@ export function ClientForm({ mode, client }: PropsClient) {
                 placeholder="000.00"
                 min={0}
                 // onChange={handleChange}
-                // value={formData.amount}
+                defaultValue={client?.amount}
                 required
               />
             </div>
