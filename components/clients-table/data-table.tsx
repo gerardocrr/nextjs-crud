@@ -38,6 +38,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import Link from "next/link";
+import { ClientForm } from "../dialogs/ClientForm";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -77,9 +78,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full">
       <div className="flex items-center py-4 justify-between">
-        <Link href="/new-client">
-          <Button>New client</Button>
-        </Link>
+        <ClientForm />
         <div className="flex gap-5">
           <Input
             placeholder="Filter emails..."
