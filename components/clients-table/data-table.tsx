@@ -37,7 +37,6 @@ import {
   SelectValue,
   SelectItem,
 } from "@/components/ui/select";
-import Link from "next/link";
 import { ClientForm } from "../dialogs/ClientForm";
 
 interface DataTableProps<TData, TValue> {
