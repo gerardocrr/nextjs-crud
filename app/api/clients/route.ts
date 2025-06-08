@@ -19,6 +19,7 @@ export async function POST(req: Request) {
     });
     return NextResponse.json({ success: true, message: "Data saved" });
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Error saving data" }, { status: 500 });
   }
 }
