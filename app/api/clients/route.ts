@@ -23,3 +23,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Error saving data" }, { status: 500 });
   }
 }
+
+export async function PUT(req: Request) {
+  try {
+    const { name, status, email, amount, id } = await req.json();
+    await turso.execute({
+      sql: "UPDATE clients SET name = ?, status = ?, email = ?, amount = ? WHERE id = ?",
+      args: [name, status, email, amount, id],
+    });
+    return NextResponse.json({ success: true, message: "Data saved" });
+  } catch (error) {
+    return NextResponse.json({ error: "Error saving data" }, { status: 500 });
+  }
+}
