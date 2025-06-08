@@ -25,6 +25,7 @@ import { useState } from "react";
 
 export function ClientForm({ mode, client }: PropsClient) {
   const [data, setData] = useState({
+    id: client?.id || "",
     name: client?.name || "",
     status: client?.status || "",
     email: client?.email || "",
@@ -37,7 +38,6 @@ export function ClientForm({ mode, client }: PropsClient) {
       ...prevData,
       [name]: value,
     }));
-    console.log(data);
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,7 +55,19 @@ export function ClientForm({ mode, client }: PropsClient) {
         }),
       });
     } else {
-      //await updateDocsApproval(data);
+      await fetch("/api/clients", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          status: data.status,
+          email: data.email,
+          amount: data.amount,
+          id: data.id,
+        }),
+      });
     }
   };
 
@@ -141,6 +153,7 @@ export function ClientForm({ mode, client }: PropsClient) {
               <Input
                 type="number"
                 id="amount"
+                step={0.01}
                 name="amount"
                 placeholder="000.00"
                 min={0}
