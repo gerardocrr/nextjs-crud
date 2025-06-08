@@ -21,51 +21,93 @@ import {
 import { Button } from "@/components/ui/button";
 import { PropsClient } from "@/lib/types";
 import { Pencil } from "lucide-react";
+import { useState } from "react";
 
 export function ClientForm({ mode, client }: PropsClient) {
+  const [data, setData] = useState({
+    name: client?.name || "",
+    status: client?.status || "",
+    email: client?.email || "",
+    amount: client?.amount || "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log(data);
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (mode === "new") {
+      await fetch("/api/clients", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          status: data.status,
+          email: data.email,
+          amount: data.amount,
+        }),
+      });
+    } else {
+      //await updateDocsApproval(data);
+    }
+  };
+
   return (
     <Dialog>
-      <form>
-        <DialogTrigger asChild>
+      <DialogTrigger asChild>
+        {mode === "new" ? (
+          <Button>New client</Button>
+        ) : (
+          <Button variant="outline" size="icon">
+            <Pencil />
+          </Button>
+        )}
+      </DialogTrigger>
+      <DialogContent>
+        <form onSubmit={handleSubmit}>
           {mode === "new" ? (
-            <Button>New client</Button>
-          ) : (
-            <Button variant="outline" size="icon">
-              <Pencil />
-            </Button>
-          )}
-        </DialogTrigger>
-        <DialogContent>
-          {mode === "new" ? (
-            <DialogHeader>
+            <DialogHeader className="mb-5">
               <DialogTitle>Add a new client</DialogTitle>
               <DialogDescription>
                 Fill in the requested data, click on save when you are done.
               </DialogDescription>
             </DialogHeader>
           ) : (
-            <DialogHeader>
+            <DialogHeader className="mb-5">
               <DialogTitle>Update client</DialogTitle>
               <DialogDescription>
                 Modify the data you need, click on update when you are done.
               </DialogDescription>
             </DialogHeader>
           )}
-          <div className="grid gap-4 w-full">
+          <div className="grid gap-4 mb-5">
             <div className="grid gap-3">
-              <label htmlFor="name">Name</label>
-              <Input id="name" name="name" defaultValue={client?.name} />
+              <label htmlFor="name">Name:</label>
+              <Input
+                id="name"
+                name="name"
+                value={data.name}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="grid gap-3">
-              <label htmlFor="status">Status</label>
+              <label htmlFor="status">Status:</label>
               <Select
-                defaultValue={client?.status}
-                // onValueChange={(value) => {
-                //   setFormData((prevData) => ({
-                //     ...prevData,
-                //     status: value,
-                //   }));
-                // }}
+                value={data.status}
+                onValueChange={(value) => {
+                  setData((prevData) => ({
+                    ...prevData,
+                    status: value,
+                  }));
+                }}
                 required
               >
                 <SelectTrigger className="w-full">
@@ -83,27 +125,27 @@ export function ClientForm({ mode, client }: PropsClient) {
               </Select>
             </div>
             <div className="grid gap-3">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email:</label>
               <Input
                 type="email"
                 id="email"
                 name="email"
                 placeholder="email@company.com"
-                // onChange={handleChange}
-                defaultValue={client?.email}
+                onChange={handleChange}
+                value={data.email}
                 required
               />
             </div>
             <div className="grid gap-3">
-              <label htmlFor="amount">Amount</label>
+              <label htmlFor="amount">Amount:</label>
               <Input
                 type="number"
                 id="amount"
                 name="amount"
                 placeholder="000.00"
                 min={0}
-                // onChange={handleChange}
-                defaultValue={client?.amount}
+                onChange={handleChange}
+                value={data.amount}
                 required
               />
             </div>
@@ -112,14 +154,10 @@ export function ClientForm({ mode, client }: PropsClient) {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            {mode === "new" ? (
-              <Button type="submit">Save</Button>
-            ) : (
-              <Button type="submit">Update</Button>
-            )}
+            <Button type="submit">{mode === "new" ? "Save" : "Update"}</Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }
