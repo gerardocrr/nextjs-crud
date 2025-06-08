@@ -20,10 +20,12 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { PropsClient } from "@/lib/types";
-import { Pencil } from "lucide-react";
+import { Pencil, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export function ClientForm({ mode, client }: PropsClient) {
+  const [open, setOpen] = useState(false);
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [data, setData] = useState({
     id: client?.id || "",
     name: client?.name || "",
@@ -41,6 +43,7 @@ export function ClientForm({ mode, client }: PropsClient) {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoadingButton(true);
     if (mode === "new") {
       await fetch("/api/clients", {
         method: "POST",
@@ -54,6 +57,8 @@ export function ClientForm({ mode, client }: PropsClient) {
           amount: data.amount,
         }),
       });
+      setIsLoadingButton(false);
+      setOpen(false);
     } else {
       await fetch("/api/clients", {
         method: "PUT",
@@ -68,11 +73,13 @@ export function ClientForm({ mode, client }: PropsClient) {
           id: data.id,
         }),
       });
+      setIsLoadingButton(false);
+      setOpen(false);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {mode === "new" ? (
           <Button>New client</Button>
@@ -167,7 +174,16 @@ export function ClientForm({ mode, client }: PropsClient) {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit">{mode === "new" ? "Save" : "Update"}</Button>
+            {isLoadingButton ? (
+              <Button type="submit" disabled>
+                <Loader2 className="animate-spin" />
+                {mode === "new" ? "Saving" : "Updating"}
+              </Button>
+            ) : (
+              <Button type="submit">
+                {mode === "new" ? "Save" : "Update"}
+              </Button>
+            )}
           </DialogFooter>
         </form>
       </DialogContent>
