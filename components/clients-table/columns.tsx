@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { Client } from "@/lib/types";
 import { ClientForm } from "../dialogs/ClientForm";
-// import { DialogDelete } from "../DialogDelete";
+import { DialogDelete } from "../dialogs/DialogDelete";
 
 export const columns = (
   reloadData: () => Promise<void>
@@ -92,7 +92,7 @@ export const columns = (
             client={row.original}
             reloadData={reloadData}
           />
-          {/* <DialogDelete table={"clients"} id={row.getValue("id")} /> */}
+          <DialogDelete id={row.getValue("id")} reloadData={reloadData} />
         </div>
       );
     },
