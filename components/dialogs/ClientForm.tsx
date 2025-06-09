@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { PropsClient } from "@/lib/types";
 import { Pencil, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function ClientForm({ mode, client, reloadData }: PropsClient) {
   const [open, setOpen] = useState(false);
@@ -60,6 +61,7 @@ export function ClientForm({ mode, client, reloadData }: PropsClient) {
       setIsLoadingButton(false);
       reloadData();
       setOpen(false);
+      toast.success("Client saved successfully.");
     } else {
       await fetch("/api/clients", {
         method: "PUT",
@@ -77,6 +79,7 @@ export function ClientForm({ mode, client, reloadData }: PropsClient) {
       setIsLoadingButton(false);
       reloadData();
       setOpen(false);
+      toast.success("Client updated successfully.");
     }
   };
 

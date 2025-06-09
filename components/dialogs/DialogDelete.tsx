@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface DialogProps {
   id: string;
@@ -34,6 +35,7 @@ export function DialogDelete({ id, reloadData }: DialogProps) {
     });
     setIsLoadingButton(false);
     reloadData();
+    toast.success("Client deleted successfully.");
   };
   return (
     <AlertDialog>
