@@ -25,4 +25,5 @@ export interface PropsClient {
     email: string;
     amount: number;
   };
+  reloadData: () => Promise<void>;
 }

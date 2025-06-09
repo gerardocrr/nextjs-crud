@@ -4,7 +4,9 @@ import { Client } from "@/lib/types";
 import { ClientForm } from "../dialogs/ClientForm";
 // import { DialogDelete } from "../DialogDelete";
 
-export const columns: ColumnDef<Client>[] = [
+export const columns = (
+  reloadData: () => Promise<void>
+): ColumnDef<Client>[] => [
   {
     accessorKey: "name",
     header: "Name",
@@ -85,7 +87,11 @@ export const columns: ColumnDef<Client>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex justify-end gap-2">
-          <ClientForm mode="update" client={row.original} />
+          <ClientForm
+            mode="update"
+            client={row.original}
+            reloadData={reloadData}
+          />
           {/* <DialogDelete table={"clients"} id={row.getValue("id")} /> */}
         </div>
       );

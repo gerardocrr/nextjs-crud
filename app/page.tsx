@@ -6,15 +6,20 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [dataClients, setDataClients] = useState([]);
-
+  const fetchData = async () => {
+    const res = await fetch("/api/clients");
+    const data = await res.json();
+    setDataClients(data);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/clients");
-      const data = await res.json();
-      setDataClients(data);
-    };
     fetchData();
   }, []);
 
-  return <DataTable columns={columns} data={dataClients} />;
+  return (
+    <DataTable
+      columns={columns(fetchData)}
+      data={dataClients}
+      reloadData={fetchData}
+    />
+  );
 }

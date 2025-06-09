@@ -23,7 +23,7 @@ import { PropsClient } from "@/lib/types";
 import { Pencil, Loader2 } from "lucide-react";
 import { useState } from "react";
 
-export function ClientForm({ mode, client }: PropsClient) {
+export function ClientForm({ mode, client, reloadData }: PropsClient) {
   const [open, setOpen] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [data, setData] = useState({
@@ -58,6 +58,7 @@ export function ClientForm({ mode, client }: PropsClient) {
         }),
       });
       setIsLoadingButton(false);
+      reloadData();
       setOpen(false);
     } else {
       await fetch("/api/clients", {
@@ -74,6 +75,7 @@ export function ClientForm({ mode, client }: PropsClient) {
         }),
       });
       setIsLoadingButton(false);
+      reloadData();
       setOpen(false);
     }
   };
