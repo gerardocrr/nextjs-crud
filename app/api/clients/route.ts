@@ -37,3 +37,16 @@ export async function PUT(req: Request) {
     return NextResponse.json({ error: "Error saving data" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { id } = await req.json();
+    await turso.execute({
+      sql: "DELETE FROM clients WHERE id = ?",
+      args: [id],
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Error deleting data" }, { status: 500 });
+  }
+}
