@@ -45,6 +45,7 @@ export async function DELETE(req: Request) {
       sql: "DELETE FROM clients WHERE id = ?",
       args: [id],
     });
+    return NextResponse.json({ success: true, message: "Data deleted" });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Error deleting data" }, { status: 500 });
