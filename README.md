@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRUD con Next.js
 
-## Getting Started
+Este es un proyecto básico de CRUD, desarrollado con **Next.js** que permite gestionar información de **clientes** y **películas**. Está diseñado con **TailwindCSS** y **ShadCN UI**, utilizando **Turso** como base de datos y **API Routes** de Next.js para la comunicación entre frontend y backend.
 
-First, run the development server:
+## 🚀 Tecnologías utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js** – Framework React con SSR/SSG.
+- **TailwindCSS** – Utilidad para estilos rápidos y responsivos.
+- **ShadCN UI** – Librería de componentes moderna y personalizable.
+- **Turso** – Base de datos ligera, rápida y distribuida.
+- **API Routes de Next.js** – Para manejar la lógica del backend.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 Características
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Listado de clientes y películas.
+- Crear, editar y eliminar registros.
+- Interfaz amigable con ShadCN y TailwindCSS.
+- Comunicación eficiente entre frontend y backend con API Routes.
+- Persistencia de datos con Turso.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🖼️ Capturas
+![image](https://github.com/user-attachments/assets/4a3f2932-5fca-4895-9838-637e0fabbcbb)
 
-## Learn More
+![image](https://github.com/user-attachments/assets/8c266415-06f2-4334-9190-3cb03d59b7bf)
 
-To learn more about Next.js, take a look at the following resources:
+![image](https://github.com/user-attachments/assets/727bea9a-9283-40fd-8a34-94aed199ee51)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![image](https://github.com/user-attachments/assets/d7689ef2-86e7-4dbf-9844-eb93c2d09a0d)
