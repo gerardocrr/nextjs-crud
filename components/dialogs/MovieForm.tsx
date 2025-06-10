@@ -26,6 +26,15 @@ export function MovieForm({ mode, movie, reloadData }: PropsMovie) {
     poster: movie?.poster || "",
   });
 
+  const clearInputs = () => {
+    setData({
+      id: "",
+      title: "",
+      year: "",
+      director: "",
+      poster: "",
+    });
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData((prevData) => ({
@@ -72,6 +81,7 @@ export function MovieForm({ mode, movie, reloadData }: PropsMovie) {
       setOpen(false);
       toast.success("Client updated successfully.");
     }
+    clearInputs();
   };
 
   return (
@@ -148,7 +158,9 @@ export function MovieForm({ mode, movie, reloadData }: PropsMovie) {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline" onClick={clearInputs}>
+                Cancel
+              </Button>
             </DialogClose>
             {isLoadingButton ? (
               <Button type="submit" disabled>

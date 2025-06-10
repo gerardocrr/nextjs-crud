@@ -35,6 +35,15 @@ export function ClientForm({ mode, client, reloadData }: PropsClient) {
     amount: client?.amount || "",
   });
 
+  const clearInputs = () => {
+    setData({
+      id: "",
+      name: "",
+      status: "",
+      email: "",
+      amount: "",
+    });
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData((prevData) => ({
@@ -81,6 +90,7 @@ export function ClientForm({ mode, client, reloadData }: PropsClient) {
       setOpen(false);
       toast.success("Client updated successfully.");
     }
+    clearInputs();
   };
 
   return (
@@ -177,7 +187,9 @@ export function ClientForm({ mode, client, reloadData }: PropsClient) {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline" onClick={clearInputs}>
+                Cancel
+              </Button>
             </DialogClose>
             {isLoadingButton ? (
               <Button type="submit" disabled>
