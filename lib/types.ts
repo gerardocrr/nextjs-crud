@@ -27,3 +27,15 @@ export interface PropsClient {
   };
   reloadData: () => Promise<void>;
 }
+
+export interface PropsMovie {
+  mode: string;
+  movie?: {
+    id: string;
+    title: string;
+    year: number;
+    director: string;
+    poster: string;
+  };
+  reloadData: () => Promise<void>;
+}

@@ -19,7 +19,7 @@ interface DialogProps {
   reloadData: () => Promise<void>;
 }
 
-export function DialogDelete({ id, reloadData }: DialogProps) {
+export function DeleteClient({ id, reloadData }: DialogProps) {
   const [isLoadingButton, setIsLoadingButton] = useState(false);
 
   const handleClicDelete = async () => {

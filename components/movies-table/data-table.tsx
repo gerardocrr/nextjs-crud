@@ -35,16 +35,18 @@ import {
   SelectValue,
   SelectItem,
 } from "@/components/ui/select";
-import Link from "next/link";
+import { MovieForm } from "../dialogs/MovieForm";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  reloadData: () => Promise<void>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  reloadData,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -75,9 +77,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full">
       <div className="flex items-center py-4 justify-between">
-        <Link href="/new-movie">
-          <Button>New movie</Button>
-        </Link>
+        <MovieForm mode="new" reloadData={reloadData} />
         <div className="flex gap-5">
           <Input
             placeholder="Filter titles..."
