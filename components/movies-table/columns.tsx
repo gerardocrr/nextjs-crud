@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { Movie } from "@/lib/types";
 import { MovieForm } from "../dialogs/MovieForm";
