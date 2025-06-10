@@ -14,7 +14,6 @@ import { PropsMovie } from "@/lib/types";
 import { Pencil, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { title } from "process";
 
 export function MovieForm({ mode, movie, reloadData }: PropsMovie) {
   const [open, setOpen] = useState(false);
